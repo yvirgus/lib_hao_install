@@ -29,5 +29,20 @@ elif(typ=="hu"):
              -DCOMPILER_EXTRA_DEF:STRING='-DMPI_HAO' \
              -DMODULE_EXTRA_PATH:STRING='~/cmake/Modules' \
              -DCMAKE_INSTALL_PREFIX:PATH=~/lib_hao/mpi "+dirc
+elif(typ=="hu+no_mpi"):
+  os.environ['SPRNG'] = "~/sprng2.0"
+  com="cmake -DCOMPILER_EXTRA_FLAG:STRING='-Wall -O3 -march=corei7 -m64 -std=c++11' \
+             -DCOMPILER_EXTRA_DEF:STRING=' ' \
+             -DUSE_MAGMA=on \
+             -DMODULE_EXTRA_PATH:STRING='~/cmake/Modules' \
+             -DCMAKE_INSTALL_PREFIX:PATH=~/lib_hao/mpi "+dirc
+elif(typ=="hu+magma"):
+  os.environ['SPRNG'] = "~/sprng2.0"
+  com="cmake -DCMAKE_CXX_COMPILER=mpicxx \
+             -DCOMPILER_EXTRA_FLAG:STRING='-Wall -O3 -march=corei7 -m64 -std=c++11' \
+             -DCOMPILER_EXTRA_DEF:STRING='-DMPI_HAO' \
+             -DUSE_MAGMA=on \
+             -DMODULE_EXTRA_PATH:STRING='~/cmake/Modules' \
+             -DCMAKE_INSTALL_PREFIX:PATH=~/lib_hao/mpi "+dirc
 
 subprocess.call(com, shell=True )
